@@ -13,7 +13,30 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+// Models
+use App\Models\Annonce;
+
+// Controllers
+use App\Http\Controllers\AnnonceController;
+use App\Http\Controllers\EvenementController;
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// User
+
+// Annonces
+Route::get('/annonces',[AnnonceController::class,'index']);
+Route::get('/annonces/{id}',[AnnonceController::class,'show']);
+Route::post('/annonces',[AnnonceController::class,'store']);
+Route::put('/annonces/{id}',[AnnonceController::class,'update']);
+Route::delete('/annonces/{id}',[AnnonceController::class,'destroy']);
+
+//Evenements
+Route::get('/evenements',[EvenementController::class,'index']);
+Route::get('/evenements/{id}',[EvenementController::class,'show']);
+Route::post('/evenements',[EvenementController::class,'store']);
+Route::put('/evenements/{id}',[EvenementController::class,'update']);
+Route::delete('/evenements/{id}',[EvenementController::class,'destroy']);
