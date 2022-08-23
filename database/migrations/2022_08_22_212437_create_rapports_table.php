@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('motif');
             $table->string('description');
-            $table->foreignId('reunion_id')->constrained('reunions');
+            $table->foreignId('seance_id')->constrained('seances');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }

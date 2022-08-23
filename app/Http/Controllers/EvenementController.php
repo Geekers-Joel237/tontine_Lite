@@ -34,6 +34,7 @@ class EvenementController extends Controller
         $validated = Validator::make($req->all(),[
             'titre'=> 'required|unique:evenements',
             'dateEvenement' => 'required',
+            'image' =>'required'
         ]);
         if($validated->fails()){
             return response()->json($validated->errors(), 400);

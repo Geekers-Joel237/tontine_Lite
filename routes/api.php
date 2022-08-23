@@ -40,3 +40,12 @@ Route::get('/evenements/{id}',[EvenementController::class,'show']);
 Route::post('/evenements',[EvenementController::class,'store']);
 Route::put('/evenements/{id}',[EvenementController::class,'update']);
 Route::delete('/evenements/{id}',[EvenementController::class,'destroy']);
+
+//publications
+Route::get('/publications',[PublicationsController::class,'index']);
+Route::get('/publications/evenements/{user_id}',[PublicationsController::class,'index']);
+Route::get('/publications/annonces/{user_id}',[PublicationsController::class,'index']);
+Route::get('/publications/evenements/{reunion_id}',[PublicationsController::class,'index']);
+
+
+
