@@ -11,6 +11,9 @@ class CotisationEvenement extends Model
     protected $fillable = [
         'montant',
         'motif',
-        'etat'
+        'etat',
+        'user_id',
+        'evenement_id',
+        'reunion_id'
     ];
 }

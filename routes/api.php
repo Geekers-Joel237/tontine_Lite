@@ -113,9 +113,10 @@ Route::get('/cotisationEvenements/{id}',[CotisationEvenementController::class,'s
 Route::get('/cotisationEvenements/user/{id}',[CotisationEvenementController::class,'getcotisationEvenementsByUserId']);
 Route::get('/cotisationEvenements/reunion/{id}',[CotisationEvenementController::class,'getcotisationEvenementsByReunionId']);
 Route::get('/cotisationEvenements/evenement/{id}',[CotisationEvenementController::class,'getcotisationEvenementsByEvenementId']);
-Route::get('/cotisationEvenements/user/event/{id}/{id}',[CotisationEvenementController::class,'getcotisationEvenementsUserByEventId']);
-Route::get('/cotisationEvenements/reunion/event/{id}/{id}',[CotisationEvenementController::class,'getcotisationEvenementsReunionByEventId']);
-
+Route::get('/cotisationEvenements/user/event/{userId}/{eventId}',[CotisationEvenementController::class,'getcotisationEvenementsUserByEventId']);
+Route::get('/cotisationEvenements/user/reunion/{userId}/{reunionId}',[CotisationEvenementController::class,'getcotisationEvenementsUserByReunionId']);
+Route::get('/cotisationEvenements/reunion/event/{reunionId}/{eventId}',[CotisationEvenementController::class,'getcotisationEvenementsReunionByEventId']);
+Route::get('/cotisationEvenements/usersList/{eventId}',[CotisationEvenementController::class,'getcotisationEvenementsUsersListByEventId']);
 Route::post('/cotisationEvenements',[CotisationEvenementController::class,'store']);
 Route::put('/cotisationEvenements/{id}',[CotisationEvenementController::class,'update']);
 Route::delete('/cotisationEvenements/{id}',[CotisationEvenementController::class,'destroy']);

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->float('montant');
             $table->string('motif');
-            $table->boolean('etat');
+            $table->boolean('etat')->default(false);
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('reunion_id')->constrained('reunions');
             $table->foreignId('evenement_id')->constrained('evenements');

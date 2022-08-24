@@ -130,6 +130,7 @@ class PublicationController extends Controller
         foreach ($userpubs as $userEvent => $value) {
             $userEventsId[] = $value->evenement_id;
         }
+        $userEventsId = array_unique($userEventsId);
         foreach ($userEventsId as $userEventId) {
             if(is_null($userEventId)){
 
