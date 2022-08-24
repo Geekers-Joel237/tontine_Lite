@@ -12,6 +12,10 @@ class Cotisation extends Model
         'nomCotisation',
         'motif',
         'etat',
-        'classement'
+        'montant',
+        'classement',
+        'user_id',
+        'seance_id',
+        'tontine_id'
     ];
 }

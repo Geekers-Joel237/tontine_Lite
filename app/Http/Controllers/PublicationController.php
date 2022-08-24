@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Publication;
-use App\Http\Controllers\EvenementController;
 use App\Models\Evenement;
 use App\Models\Annonce;
 
@@ -41,10 +40,10 @@ class PublicationController extends Controller
         if($validated->fails()){
             return response()->json($validated->errors(), 400);
         }
-        $evenement = Publication :: create($req->all());
+        $publication = Publication :: create($req->all());
         return response()->json([
             'message' => 'publication Ajoutee avec Success',
-            'data' => $evenement
+            'data' => $publication
 
         ],201);
     }

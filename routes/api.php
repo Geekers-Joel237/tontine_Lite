@@ -25,6 +25,10 @@ use App\Http\Controllers\TontineController;
 use App\Http\Controllers\SeanceController;
 use App\Http\Controllers\SanctionController;
 use App\Http\Controllers\CotisationEvenementController;
+use App\Http\Controllers\IntegrationController;
+use App\Http\Controllers\CotisationController;
+
+
 
 
 
@@ -121,4 +125,30 @@ Route::post('/cotisationEvenements',[CotisationEvenementController::class,'store
 Route::put('/cotisationEvenements/{id}',[CotisationEvenementController::class,'update']);
 Route::delete('/cotisationEvenements/{id}',[CotisationEvenementController::class,'destroy']);
 
+//Integrations
+Route::get('/integrations',[IntegrationController::class,'index']);
+Route::get('/integrations/{id}',[IntegrationController::class,'show']);
+Route::get('/integrations/usersList/{reunionId}',[IntegrationController::class,'getUserListByReunionId']);
+Route::get('/integrations/user/{reunionId}',[IntegrationController::class,'getintegrationsByReunionId']);
+Route::get('/integrations/reunionsList/{userId}',[IntegrationController::class,'getReunionListByUserId']);
+Route::post('/integrations',[IntegrationController::class,'store']);
+Route::put('/integrations/{id}',[IntegrationController::class,'update']);
+Route::delete('/integrations/{id}',[IntegrationController::class,'destroy']);
 
+//Cotisations
+Route::get('/cotisations',[CotisationController::class,'index']);
+Route::get('/cotisations/{id}',[CotisationController::class,'show']);
+Route::get('/cotisations/user/{id}',[CotisationController::class,'getcotisationsByUserId']);
+Route::get('/cotisations/seance/{id}',[CotisationController::class,'getcotisationsBySeanceId']);
+Route::get('/cotisations/tontine/{id}',[CotisationController::class,'getcotisationsByTontineId']);
+Route::get('/cotisations/user/tontine/{userId}/{tontineId}',[CotisationController::class,'getcotisationsUserByTontineId']);
+Route::get('/cotisations/user/seance/{userId}/{seanceId}',[CotisationController::class,'getcotisationsUserBySeanceId']);
+Route::get('/cotisations/tontine/seance/{tontineId}/{seanceId}',[CotisationController::class,'getcotisationsTontineBySeanceId']);
+Route::get('/cotisations/tontinesList/{userId}',[CotisationController::class,'getTontineListByUserId']);
+Route::get('/cotisations/usersList/{tontineId}',[CotisationController::class,'getUserListByTontineId']);
+Route::post('/cotisations',[CotisationController::class,'store']);
+Route::put('/cotisations/{id}',[CotisationController::class,'update']);
+Route::delete('/cotisations/{id}',[CotisationController::class,'destroy']);
+
+
+//imagescni

@@ -10,6 +10,8 @@ class Integration extends Model
     use HasFactory;
     protected $fillable = [
         'dateIntegration',
-        'statutMembre'
+        'statutMembre',
+        'user_id',
+        'reunion_id'
     ];
 }

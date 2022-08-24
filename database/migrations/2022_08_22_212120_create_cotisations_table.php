@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nomCotisation');
             $table->string('motif');
+            $table->float('montant');
             $table->boolean('etat');
             $table->integer('classement');
             $table->foreignId('user_id')->constrained('users');
