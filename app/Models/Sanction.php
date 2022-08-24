@@ -11,6 +11,7 @@ class Sanction extends Model
     protected $fillable = [
         'motif',
         'dateSanction',
-        'montantSanction'
+        'montantSanction',
+        'user_id'
     ];
 }

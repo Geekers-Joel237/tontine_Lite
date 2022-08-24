@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('reunions', function (Blueprint $table) {
             $table->id();
             $table->string('nomReunion');
-            $table->string('codeAdhesion');
+            $table->string('codeAdhesion')->default('xxx-yyy');
             $table->text('reglement');
             $table->string('slogan');
             $table->integer('maxEffectif');

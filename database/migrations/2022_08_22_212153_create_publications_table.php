@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('publications', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('reunion_id')->constrained('reunions');
             $table->foreignId('evenement_id')->nullable();
             $table->foreignId('annonce_id')->nullable();
             $table->timestamps();

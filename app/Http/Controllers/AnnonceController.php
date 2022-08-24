@@ -78,7 +78,7 @@ class AnnonceController extends Controller
             return response()->json([
                 'message'=>'annonce d\'indentifiant '.$id.' supprimee',
                 'data'=>$copieAnnonce
-            ],204);
+            ]);
         }
 
     }

@@ -15,7 +15,8 @@ class Tontine extends Model
         'reglement',
         'numeroCompte',
         'effectifMax',
-        'montant'
+        'montant',
+        'reunion_id'
     ];
 
     public function reunions(){

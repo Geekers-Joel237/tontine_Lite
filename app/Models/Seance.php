@@ -11,7 +11,8 @@ class Seance extends Model
     protected $fillable = [
         'dateSeance',
         'heureSeance',
-        'etat'
+        'etat',
+        'reunion_id'
 
     ];
 

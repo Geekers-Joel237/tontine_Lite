@@ -79,6 +79,6 @@ class EvenementController extends Controller
             return response()->json([
                 'message'=>'evenement d\'indentifiant '.$id.' supprimee',
                 'data'=>$copieevenement
-            ],204);
+            ]);
         }
 }

@@ -11,5 +11,7 @@ class Rapport extends Model
     protected $fillable = [
         'motif',
         'description',
+        'seance_id',
+        'user_id'
     ];
 }

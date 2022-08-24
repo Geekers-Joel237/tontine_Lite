@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('sanctions', function (Blueprint $table) {
             $table->id();
+            $table->string('motif');
             $table->date('dateSanction');
             $table->float('montantSanction');
             $table->foreignId('user_id')->constrained('users');

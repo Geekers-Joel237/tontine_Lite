@@ -13,7 +13,8 @@ class Reunion extends Model
         'codeAdhesion',
         'reglement',
         'slogan',
-        'mmaxEffectif'
+        'maxEffectif',
+        'user_id'
     ];
 
     public function users(){
