@@ -28,6 +28,8 @@ use App\Http\Controllers\CotisationEvenementController;
 use App\Http\Controllers\IntegrationController;
 use App\Http\Controllers\CotisationController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FileUploadController;
+
 
 
 
@@ -159,3 +161,4 @@ Route::delete('/cotisations/{id}',[CotisationController::class,'destroy']);
 
 
 //imagescni
+Route::post('/upload-file', [FileUploadController::class, 'fileUpload']);

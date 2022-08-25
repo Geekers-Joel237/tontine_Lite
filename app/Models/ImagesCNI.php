@@ -10,7 +10,8 @@ class ImagesCNI extends Model
     use HasFactory;
     protected $fillable = [
         'nomImage',
-        'user_id'
+        'user_id',
+        'filePath'
     ];
 
     public function users() {

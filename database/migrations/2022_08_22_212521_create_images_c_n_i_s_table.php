@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('images_c_n_i_s', function (Blueprint $table) {
             $table->id();
             $table->string('nomImage');
+            $table->string('filePath');
             $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });

@@ -19,6 +19,7 @@ class ImagesCNIFactory extends Factory
         return [
             //
             'nomImage'=>$this->faker->text(50)                          ,
+            'filePath'=>$this->faker->text(50)                          ,
             'user_id'=>$this->faker->numberBetween($min = 1, $max = 100),
 
 

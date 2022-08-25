@@ -34,6 +34,8 @@ class PublicationController extends Controller
 
     public function store(Request $req){
         $validated = Validator::make($req->all(),[
+            'evenement_id'=>'sometimes',
+            'annonce_id'=>'sometimes',
             'user_id'=> 'required',
             'reunion_id'=> 'required',
         ]);
