@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Cotisation::factory(100)->create();
         \App\Models\CotisationEvenement::factory(100)->create();
         \App\Models\Evenement::factory(100)->create();
-        \App\Models\ImagesCNI::factory(100)->create();
+        \App\Models\Fichier::factory(100)->create();
         \App\Models\Integration::factory(100)->create();
         \App\Models\Publication::factory(100)->create();
         \App\Models\Rapport::factory(100)->create();

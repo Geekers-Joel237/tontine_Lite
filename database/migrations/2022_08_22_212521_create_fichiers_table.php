@@ -13,11 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('images_c_n_i_s', function (Blueprint $table) {
+        Schema::create('fichiers', function (Blueprint $table) {
             $table->id();
-            $table->string('nomImage');
+            $table->string('nomFichier');
             $table->string('filePath');
-            $table->foreignId('user_id')->constrained('users');
+            $table->string('extension');
+            $table->foreignId('user_id')->nullable()->constrained('users');
+            $table->foreignId('evenement_id')->nullable()->constrained('evenements');
+            $table->foreignId('rapport_id')->nullable()->constrained('rapports');
+
             $table->timestamps();
         });
     }
@@ -29,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('images_c_n_i_s');
+        Schema::dropIfExists('fichiers');
     }
 };

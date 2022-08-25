@@ -5,13 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ImagesCNI extends Model
+class Fichier extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'nomImage',
+        'nomFichier',
+        'filePath',
+        'extension',
         'user_id',
-        'filePath'
+        'evenement_id',
+        'rapport_id',
     ];
 
     public function users() {
