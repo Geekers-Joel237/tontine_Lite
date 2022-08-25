@@ -23,12 +23,12 @@ class FileUploadController extends Controller
 
 
       if ($file = $request->file('file')) {
-          $path = $file->store('public/images');
+          $path = $file->store('images');
           $name = $file->getClientOriginalName();
 
           //store your file into directory and db
           $save = new ImagesCNI();
-          $save->nomImage = $file;
+          $save->nomImage = $name;
           $save->filePath= $path;
           $save->user_id= intval($request->user_id) ;
           $save->save();
@@ -36,7 +36,8 @@ class FileUploadController extends Controller
           return response()->json([
               "success" => true,
               "message" => "File successfully uploaded",
-              "file" => $file
+              "file" => $file,
+              "name" => $path,
           ]);
 
       }

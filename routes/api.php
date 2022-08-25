@@ -41,14 +41,15 @@ use App\Http\Controllers\FileUploadController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+
 });
 
 // User
 Route::controller(AuthController::class)->group(function () {
-    Route::post('login', 'login');
-    Route::post('register', 'register');
-    Route::post('logout', 'logout');
-    Route::post('refresh', 'refresh');
+    Route::post('/auth/login', 'login');
+    Route::post('/auth/register', 'register');
+    Route::post('/auth/refresh', 'refresh');
+    Route::post('/auth/logout', 'logout');
 
 });
 
