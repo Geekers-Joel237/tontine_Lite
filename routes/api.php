@@ -27,7 +27,7 @@ use App\Http\Controllers\SanctionController;
 use App\Http\Controllers\CotisationEvenementController;
 use App\Http\Controllers\IntegrationController;
 use App\Http\Controllers\CotisationController;
-
+use App\Http\Controllers\AuthController;
 
 
 
@@ -42,6 +42,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // User
+Route::controller(AuthController::class)->group(function () {
+    Route::post('login', 'login');
+    Route::post('register', 'register');
+    Route::post('logout', 'logout');
+    Route::post('refresh', 'refresh');
+
+});
 
 // Annonces
 Route::get('/annonces',[AnnonceController::class,'index']);
