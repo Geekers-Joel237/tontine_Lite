@@ -44,7 +44,50 @@ class FileUploadController extends Controller
         }
    }
 
- 
+   public function fileUpload(Request $req){
+    $req->validate([
+      'files' => 'required',
+      'files.*' => 'mimes:jpeg,jpg,png,gif,csv,txt,doc,docx,pdf|max:2048'
+    ]);
+     if($req->hasfile('files')) {
+         foreach($req->file('files') as $file)
+         {
+
+            $fileName = time().'_'.$file->getClientOriginalName();
+            $extension = $file->getClientOriginalExtension();
+            $filePath = $file->storeAs('uploads', $fileName, 'public');
+
+            $fileModal = new Fichier();
+            $fileModal->nomFichier = json_encode($fileName);
+            $fileModal->filePath = json_encode($filePath);
+            $fileModal->extension = json_encode($extension);
+
+            if(isset($req->rapport_id) && !isset($req->user_id) && !isset($req->event_id)){
+                $fileModal->rapport_id = $req->rapport_id;
+            }else if(isset($req->user_id) && !isset($req->event_id) && !isset($req->rapport_id)){
+                $fileModal->user_id = $req->user_id;
+
+            }else if (isset($req->event_id) && !isset($req->rapport_id) && !isset($req->user_id)){
+                $fileModal->evenement_id = $req->event_id;
+
+            }
+
+            $fileModal->save();
+        }
+
+
+
+
+        return response()->json([
+            "success" => true,
+            "message" => "File successfully uploaded",
+            "file" => $req->files,
+        ]);
+
+    }
+  }
+
+
 
 
   public function getDocumentsByCustomId(Request $req){
