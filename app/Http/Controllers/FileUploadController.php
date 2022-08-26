@@ -6,147 +6,133 @@ use Illuminate\Http\Request;
 use App\Models\Fichier;
 // use Validator;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\File;
 
 class FileUploadController extends Controller
 {
-    //
-    public function fileUpload(Request $request){
-        $validator = Validator::make($request->all(),[
-            'file' => 'required|mimes:doc,docx,pdf,txt,csv,png,jpg,jpeg',
+
+
+    public function fileUpload1(Request $req){
+        $req->validate([
+            'file' => 'required|mimes:doc,docx,pdf,txt,csv,png,jpg,jpeg|max:2048',
             'user_id'=>'sometimes',
             'evenement_id'=>'sometimes',
             'rapport_id'=>'sometimes'
+        ]);
+        $fileModel = new Fichier;
+        if($req->file()) {
 
+            $fileName = time().'_'.$req->file->getClientOriginalName();
+            $extension = $req->file->getClientOriginalExtension();
+            $filePath = $req->file('file')->storeAs('uploads', $fileName, 'public');
+            $fileModel->nomFichier = $fileName;
+            $fileModel->filePath = '/storage/' . $filePath;
+            $fileModel->extension = $extension;
 
-      ]);
+            if($req->user_id)   $fileModel->user_id = $req->user_id;
+            if($req->rapport_id)   $fileModel->rapport_id = $req->rapport_id;
+            if($req->evenement_id)   $fileModel->evenement_id = $req->evenement_id;
 
-      if($validator->fails()) {
+            $fileModel->save();
 
-          return response()->json(['error'=>$validator->errors()], 401);
-       }
+            return response()->json([
+                "success" => true,
+                "message" => "File successfully uploaded",
+                "file" => $fileName,
+            ]);
 
-
-      if ($files = $request->file('file')) {
-        foreach ($files as $file) {
-          $path = $file->store('public/images');
-          $name = $file->getClientOriginalName();
-        $extension = $file->getClientOriginalExtension();
-
-          //store your file into directory and db
-          $save = new Fichier();
-          $save->nomFichier = $name;
-          $save->filePath= $path;
-          $save->extension = $extension;
-          $save->user_id= intval($request->user_id) ;
-          $save->save();
         }
-          return response()->json([
-              "success" => true,
-              "message" => "File successfully uploaded",
-              "file" => $files,
-            //   "name" => $path,
-          ]);
-
-
-          //   }
-    //     $documents = [];
-    // if($request->hasFile('file')){
-    //     $files = $request->file('file');
-    //     // foreach ($variable as $key => $value) {
-    //     //     # code...
-    //     // }
-    //     foreach($files as $file){
-    //         // return response()->json($file);
-    //         $filename = $file->getClientOriginalName();
-    //         $extension = $file->getClientOriginalExtension();
-    //         $path = $file->store('public/images');
-    //         // $file->move(public_path().'/images/', $name);
-    //         $save = new Fichier;
-    //         $save->nomFichier = $filename;
-    //         $save->extension = $extension;
-    //         $save->filePath = $path;
-    //         if(isset($user_id)){
-    //             $save->userId = $user_id;
-    //         }else if(isset($rapport_id)){
-    //             $save->rapportId = $rapport_id;
-    //         }else if(isset($evenement_id)){
-    //             $save->evenementId = $evenement_id;
-    //         }
-    //         $save-> save();
-    //         // $documents [] = $save;
-
-    //     }
-        //       return response()->json([
-        //       "success" => true,
-        //       "message" => "File successfully uploaded",
-        //       "files" => $files
-        //     //   "name" => $path,
-        //   ]);
-
-    }
-
-
-}
-
-
-public function store(Request $request)
-{
-
-    $validator = Validator::make($request->all(),[
-        'files' => 'required|mimes:doc,docx,pdf,txt,csv,png,jpg,jpeg',
-        'user_id'=>'sometimes',
-        'evenement_id'=>'sometimes',
-        'rapport_id'=>'sometimes'
-
-
-  ]);
-
-  if($validator->fails()) {
-
-      return response()->json(['error'=>$validator->errors()], 401);
    }
 
-    if($request->hasfile('files'))
-     {
-        $files = $request->file('files');
-        foreach($files as $file){
-            $filename = time().'_'.$file->getClientOriginalName();
-            $path = $file->store('public/images');
-            $extension =  $file->getClientOriginalExtension();
-            $request['nomFichier'] = $filename;
-            $request['filePath'] = $path;
-            $request[extension] = $extension;
-            $file->move(\public_path("images"),$filename);
-            Fichier::create($request->all());
-        }
-     }
+ 
 
-     return response()->json([
-        "success" => true,
-        "message" => "File successfully uploaded",
-        "file" => $files,
-      //   "name" => $path,
+
+  public function getDocumentsByCustomId(Request $req){
+    $req->validate([
+        'user_id'=>'sometimes',
+        'event_id'=>'sometimes',
+        'rapport_id'=>'sometimes'
     ]);
-  }
-
-  public function getDocumentsByCustomId($user_id,$rapport_id,$event_id){
     $data = [];
     $message = '';
-    if(isset($rapport_id) && !isset($user_id) && !isset($event_id)){
-        $message = 'Liste des documents du rapport d\'id '.$rapport_id;
-        $data = Fichier::all()->where('rapport_id',$rapport_id);
-    }else if(isset($user_id) && !isset($event_id) && !isset($rapport_id)){
-        $message = 'Liste des images cni du user d\'id '.$user_id;
-        $data = Fichier::all()->where('user_id',$user_id);
-    }else if (isset($event_id) && !isset($rapport_id) && !isset($user_id)){
-        $message = 'Liste des images de l\'evenement d\'id '.$event_id;
-        $data = Fichier::all()->where('event_id',$event_id);
+    if(isset($req->rapport_id) && !isset($req->user_id) && !isset($req->event_id)){
+        $message = 'Liste des documents du rapport d\'id '.$req->rapport_id;
+        $data = Fichier::all()->where('rapport_id',$req->rapport_id);
+    }else if(isset($req->user_id) && !isset($req->event_id) && !isset($req->rapport_id)){
+        $message = 'Liste des images cni du user d\'id '.$req->user_id;
+        $data = Fichier::all()->where('user_id',$req->user_id);
+    }else if (isset($req->event_id) && !isset($req->rapport_id) && !isset($req->user_id)){
+        $message = 'Liste des images de l\'evenement d\'id '.$req->event_id;
+        $data = Fichier::all()->where('evenement_id',$req->event_id);
     }
     return response()->json($data);
   }
 
+  public function deleteFile($id){
+    $files=Fichier::findOrFail($id);
+    if (File::exists(public_path("storage/uploads/".$files->nomFichier))) {
+       File::delete(public_path("storage/uploads/".$files->nomFichier));
+       Fichier::find($id)->delete();
+       return response()->json('ok');
+   }else{
+    return response()->json('not found');
+
+   }
+
+}
+
+public function updateFile($id,Request $req){
+    $req->validate([
+        'file' => 'required|mimes:doc,docx,pdf,txt,csv,png,jpg,jpeg|max:2048',
+        'user_id'=>'sometimes',
+        'evenement_id'=>'sometimes',
+        'rapport_id'=>'sometimes'
+    ]);
+    $files=Fichier::findOrFail($id);
+    if (File::exists("storage/uploads/".$files->nomFichier)) {
+       File::delete("storage/uploads/".$files->nomFichier);
+
+          Fichier::find($id)->delete();
+
+
+       $fileModel = new Fichier;
+       if($req->file()) {
+           $fileName = time().'_'.$req->file->getClientOriginalName();
+           $extension = $req->file->getClientOriginalExtension();
+           $filePath = $req->file('file')->storeAs('uploads', $fileName, 'public');
+           $fileModel->nomFichier = time().'_'.$req->file->getClientOriginalName();
+           $fileModel->filePath = '/storage/' . $filePath;
+           $fileModel->extension = $extension;
+
+           if($req->user_id)   $fileModel->user_id = $req->user_id;
+           if($req->rapport_id)   $fileModel->rapport_id = $req->rapport_id;
+           if($req->evenement_id)   $fileModel->evenement_id = $req->evenement_id;
+
+           $fileModel->save();
+
+           return response()->json([
+               "success" => true,
+               "message" => "File successfully uploaded",
+               "file" => $fileName,
+           ]);
+   }else{
+    return response()->json([
+        "success" => false,
+        "message" => "File required",
+        "file" => 'null',
+    ],404);
+   }
+}else{
+    return response()->json([
+        "success" => false,
+        "message" => "File not found",
+        "file" => 'null',
+    ]);
+}
+
 
 
 }
 
 
+}

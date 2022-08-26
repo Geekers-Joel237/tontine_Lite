@@ -162,5 +162,8 @@ Route::delete('/cotisations/{id}',[CotisationController::class,'destroy']);
 
 
 //imagescni
-Route::post('/upload-file', [FileUploadController::class, 'fileUpload']);
-Route::get('/documents/{userId}/{eventId}/{rapportId}',[FileUploadController::class,'getDocumentsByCustomId']);
+Route::post('/upload-file', [FileUploadController::class, 'fileUpload1']);
+Route::post('/documents',[FileUploadController::class,'getDocumentsByCustomId']);
+Route::delete('/documents/{id}',[FileUploadController::class, 'deleteFile']);
+Route::post('/documents/{id}',[FileUploadController::class, 'updateFile']);
+
