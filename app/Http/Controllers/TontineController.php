@@ -93,9 +93,17 @@ class TontineController extends Controller
         }
 
         public function getTontinesByReunionId($reunionId){
-            $tontines = Tontine::all()->where('reunion_id',$reunionId);
+            $tontines = Tontine::where('reunion_id',$reunionId);
             return response()->json([
                 'message'=>'tontines appartenant a la reunion d\'id '. $reunionId,
+                'data'=>$tontines
+            ]);
+        }
+
+        public function getTontinesOuvertes(){
+            $tontines = Tontine::all()->where('reunion_id',null);
+            return response()->json([
+                'message'=>'tontines ouvertes',
                 'data'=>$tontines
             ]);
         }

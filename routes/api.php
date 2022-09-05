@@ -44,6 +44,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 });
 
+// Route::middleware(['cors'])->group(function () {
+//     Route::post('/auth/login',[AuthController::class,'login'] );
+
+// });
 // User
 Route::controller(AuthController::class)->group(function () {
     Route::post('/auth/login', 'login');
@@ -100,15 +104,16 @@ Route::delete('/rapports/{id}',[RapportController::class,'destroy']);
 // tontines
 Route::get('/tontines',[TontineController::class,'index']);
 Route::get('/tontines/{id}',[TontineController::class,'show']);
-Route::get('/tontines/reunion/{id}',[TontineController::class,'getTontinesByReunionId']); //
+Route::get('/tontines/reunion/{id}',[TontineController::class,'getTontinesByReunionId']);
 Route::post('/tontines',[TontineController::class,'store']);
 Route::put('/tontines/{id}',[TontineController::class,'update']);
 Route::delete('/tontines/{id}',[TontineController::class,'destroy']);
+Route::get('/tontinesOuvertes',[TontineController::class,'getTontinesOuvertes']);
 
 //seances
 Route::get('/seances',[SeanceController::class,'index']);
 Route::get('/seances/{id}',[SeanceController::class,'show']);
-Route::get('/seances/reunion/{id}',[SeanceController::class,'getSeancesByReunionId']); //
+Route::get('/seances/reunion/{id}',[SeanceController::class,'getSeancesByReunionId']);
 Route::post('/seances',[SeanceController::class,'store']);
 Route::put('/seances/{id}',[SeanceController::class,'update']);
 Route::delete('/seances/{id}',[SeanceController::class,'destroy']);
@@ -116,7 +121,7 @@ Route::delete('/seances/{id}',[SeanceController::class,'destroy']);
 // sanctions
 Route::get('/sanctions',[SanctionController::class,'index']);
 Route::get('/sanctions/{id}',[SanctionController::class,'show']);
-Route::get('/sanctions/user/{id}',[SanctionController::class,'getsanctionsByUserId']); //
+Route::get('/sanctions/user/{id}',[SanctionController::class,'getsanctionsByUserId']);
 Route::post('/sanctions',[SanctionController::class,'store']);
 Route::put('/sanctions/{id}',[SanctionController::class,'update']);
 Route::delete('/sanctions/{id}',[SanctionController::class,'destroy']);

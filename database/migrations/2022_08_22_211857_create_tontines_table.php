@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('numeroCompte');
             $table->Integer('effectifMax');
             $table->float('montant');
-            $table->foreignId('reunion_id')->constrained('reunions');
+            $table->foreignId('reunion_id')->nullable()->constrained('reunions');
             $table->timestamps();
         });
     }
