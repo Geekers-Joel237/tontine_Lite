@@ -13,6 +13,7 @@ class Seance extends Model
         'dateS',
         'statutS',
         'etatS',
+        'frequence',
         'exercice_id'
     ];
 

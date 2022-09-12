@@ -19,8 +19,9 @@ return new class extends Migration
             $table->string('statutMembre')->default('Membre');
             $table->boolean('estActif')->default(true);
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('exercice_id')->constrained('exercices')->onDelete('cascade');
+            $table->foreignId('exercice_id')->nullabe()->constrained('exercices')->onDelete('cascade');
             $table->foreignId('tontine_id')->constrained('tontines')->onDelete('cascade');
+            $table->foreignId('demande_id')->constrained('demandes')->onDelete('cascade');
             $table->timestamps();
         });
     }

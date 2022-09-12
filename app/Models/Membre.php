@@ -14,7 +14,8 @@ class Membre extends Model
         'estActif',
         'user_id',
         'exercice_id',
-        'tontine_id'
+        'tontine_id',
+        'demande_id'
     ];
 
     public function seance(){

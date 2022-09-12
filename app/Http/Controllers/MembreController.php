@@ -33,8 +33,9 @@ class MembreController extends Controller
     public function store(Request $req){
         $validated = Validator::make($req->all(),[
             'tontine_id' =>'required',
-            'exercice_id' =>'required',
+            'exercice_id' =>'sometimes',
             'user_id' =>'required',
+            'demande_id' =>'required',
 
 
         ]);
@@ -65,8 +66,10 @@ class MembreController extends Controller
         }
         $validated = Validator::make($req->all(),[
             'tontine_id' =>'required',
-            'exercice_id' =>'required',
+            'exercice_id' =>'sometimes',
             'user_id' =>'required',
+            'demande_id' =>'required',
+
         ]);
         if($validated->fails()){
             return response()->json($validated->errors(), 400);

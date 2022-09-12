@@ -22,8 +22,9 @@ return new class extends Migration
             $table->string('pays');
             $table->string('ville');
             $table->string('adresse');
-            $table->string('telephone');
+            $table->string('telephone')->unique();
             $table->string('cni');
+            $table->string('role')->default('Membre');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

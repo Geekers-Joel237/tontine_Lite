@@ -35,6 +35,7 @@ class SeanceController extends Controller
         $validated = Validator::make($req->all(),[
             'nomS'=> 'required|unique:Seances',
             'dateS' => 'required',
+            'frequence' => 'required',
             'exercice_id'=>'required'
 
         ]);
@@ -66,6 +67,7 @@ class SeanceController extends Controller
         $validated = Validator::make($req->all(),[
             'nomS'=> 'required|unique:Seances',
             'dateS' => 'required',
+            'frequence' => 'required',
             'exercice_id'=>'required'
         ]);
         if($validated->fails()){

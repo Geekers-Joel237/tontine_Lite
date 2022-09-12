@@ -35,7 +35,7 @@ class DemandeController extends Controller
         $validated = Validator::make($req->all(),[
 
             'exercice_id' =>'sometimes',
-            'membre_id'=>'required',
+            'user_id'=>'required',
             'tontine_id'=>'sometimes'
 
         ]);
@@ -66,7 +66,7 @@ class DemandeController extends Controller
         }
         $validated = Validator::make($req->all(),[
             'exercice_id' =>'sometimes',
-            'membre_id'=>'required',
+            'user_id'=>'required',
             'tontine_id'=>'sometimes'
         ]);
         if($validated->fails()){
@@ -104,24 +104,42 @@ class DemandeController extends Controller
                 $Demandes = Demande::where('exercice_id', $req->exercice_id)->get();
                 $msg = 'Demandes de l\'exercice '.$req->exercice_id;
             }
-            if($req->membre_id){
-                $Demandes = Demande::where('membre_id', $req->membre_id)->get();
-                $msg = 'Demandes du membre'.$req->membre_id;
+            if($req->user_id){
+                $Demandes = Demande::where('user_id', $req->user_id)->get();
+                $msg = 'Demandes du user'.$req->user_id;
             }
-            if($req->exercice_id and $req->membre_id){
+            if($req->user_id and $req->validation){
+                echo(0);
+                if($req->validation == 'false'){
+                    echo(1);
+                    $Demandes = Demande::where('user_id', $req->user_id)
+                                        ->where('validation',false)
+                                        ->get();
+                }else {
+                    echo(2);
+
+                    $Demandes = Demande::where('user_id', $req->user_id)
+                                        ->where('validation',true)
+                                        ->get();
+                }
+                $msg = 'Demandes du user'.$req->user_id;
+            }
+           
+            if($req->exercice_id and $req->user_id){
                 $Demandes = Demande::where('exercice_id', $req->exercice_id)
-                ->where('membre_id', $req->membre_id)
+                ->where('user_id', $req->user_id)
                 ->get();
                 $msg = 'Demandes de l\'exercice  '.$req->exercice_id .
-                ' pour le membre '.$req->membre_id;
+                ' pour le user '.$req->user_id;
             }
-            if($req->tontine_id and $req->membre_id ){
+            if($req->tontine_id and $req->user_id ){
                 $Demandes = Demande::where('tontine_id', $req->tontine_id)
-                ->where('membre_id', $req->membre_id)
+                ->where('user_id', $req->user_id)
                 ->get();
                 $msg = ' tontine  '.$req->tontine_id .
-                ' membre '.$req->membre_id;
+                ' user '.$req->user_id;
             }
+
 
 
             return response()->json([

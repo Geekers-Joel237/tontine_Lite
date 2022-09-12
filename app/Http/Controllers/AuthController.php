@@ -44,7 +44,8 @@ class AuthController extends Controller
                 'adresse'=>'required|string',
                 'ville'=>'required|string',
                 'pays'=>'required|string',
-                'cni'=>'required|string'
+                'cni'=>'required|string',
+                'role'=>'sometimes'
             ]);
 
             if($validateUser->fails()){
@@ -64,7 +65,8 @@ class AuthController extends Controller
                 'adresse'=>$request->adresse,
                 'ville'=>$request->ville,
                 'pays'=>$request->pays,
-                'cni'=>$request->cni
+                'cni'=>$request->cni,
+                'role'=>$request->role ? 'admin' : 'membre'
             ]);
 
             return response()->json([

@@ -21,6 +21,7 @@ class SeanceFactory extends Factory
             'dateS'=>$this->faker->date($format = 'Y-m-d'),
             'statutS'=>$this->faker->boolean(),
             'etatS'=>$this->faker->boolean(),
+            'frequence'=>$this->faker->numberBetween($min = 1, $max = 30),
             'exercice_id'=>$this->faker->numberBetween($min = 1, $max = 100)
         ];
     }

@@ -26,7 +26,8 @@ class User extends Authenticatable
         'adresse',
         'ville',
         'pays',
-        'cni'
+        'cni',
+        'role'
     ];
 
     /**

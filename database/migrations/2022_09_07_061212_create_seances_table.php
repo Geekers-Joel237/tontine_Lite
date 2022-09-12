@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('dateS');
             $table->boolean('statutS')->default(true);
             $table->boolean('etatS')->default(false);
+            $table->float('frequence');
             $table->foreignId('exercice_id')->constrained('exercices')->onDelete('cascade');
             $table->timestamps();
         });
