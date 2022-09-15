@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Tontine;
+use Illuminate\Support\Facades\DB;
 
 class TontineController extends Controller
 {
@@ -161,6 +162,14 @@ class TontineController extends Controller
             $msg = '';
             if($req->user_id and !$req->type ){
                 $tontines = Tontine::where('user_id', $req->user_id)->get();
+                foreach ($tontines as $key => $value) {
+                    $value->demandes = DB::table('demandes')
+                    ->join('users','users.id','=','demandes.user_id')
+                    ->where('demandes.tontine_id',$value->id)
+                    ->where('demandes.validation','0')
+                    ->select('demandes.*','users.nom','users.prenom','users.id as idutilisateurs')
+                    ->get();
+                }
                 $msg = 'tontine de l\'user '.$req->user_id;
             }else if($req->type and !$req->user_id){
                 $tontines = Tontine::where('type', $req->type)->get();
@@ -168,8 +177,26 @@ class TontineController extends Controller
 
             }else if($req->user_id and $req->type){
                 $tontines = Tontine::where('user_id', $req->user_id)->where('type', $req->type)->get();
+                foreach ($tontines as $key => $value) {
+                    $value->demandes = DB::table('demandes')
+                    ->join('users','users.id','=','demandes.user_id')
+                    ->where('demandes.tontine_id',$value->id)
+                    ->where('demandes.validation','0')
+                    ->select('demandes.*','users.nom','users.prenom','users.id as idutilisateurs')
+                    ->get();
+                }
                 $msg = 'tontine de type '.$req->type.' l\'user '.$req->user_id;
             }
+
+            // $tontines = Tontine::where('user_id', $req->user_id)->where('type', $req->type)->get();
+            //     foreach ($tontines as $key => $value) {
+            //         $value->demandes = DB::table('demandes')
+            //         ->join('users','users.id','=','demandes.user_id')
+            //         ->where('demandes.tontine_id',$value->id)
+            //         ->select('demandes.*','users.nom','users.prenom','users.id as idutilisateurs')
+            //         ->get();
+            //     }
+
             return response()->json([
                 'message'=>$msg,
                 'data'=>$tontines

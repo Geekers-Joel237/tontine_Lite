@@ -9,7 +9,6 @@ class Membre extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'dateIntegration',
         'statutMembre',
         'estActif',
         'user_id',

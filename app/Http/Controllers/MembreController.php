@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Membre;
+use Illuminate\Support\Facades\DB;
+
 
 class MembreController extends Controller
 {
@@ -33,9 +35,9 @@ class MembreController extends Controller
     public function store(Request $req){
         $validated = Validator::make($req->all(),[
             'tontine_id' =>'required',
-            'exercice_id' =>'sometimes',
+            // 'exercice_id' =>'sometimes',
             'user_id' =>'required',
-            'demande_id' =>'required',
+            'demande_id' =>'sometimes',
 
 
         ]);
@@ -66,9 +68,9 @@ class MembreController extends Controller
         }
         $validated = Validator::make($req->all(),[
             'tontine_id' =>'required',
-            'exercice_id' =>'sometimes',
+            // 'exercice_id' =>'sometimes',
             'user_id' =>'required',
-            'demande_id' =>'required',
+            'demande_id' =>'sometimes',
 
         ]);
         if($validated->fails()){
@@ -112,6 +114,16 @@ class MembreController extends Controller
                 $Membres = Membre::where('exercice_id', $req->exercice_id)->get();
                 $msg = 'Membres de l\'exercice '.$req->exercice_id;
             }
+            if($req->user_id){
+                $Membres = DB::table('tontines')
+                        ->join('membres','tontines.id','=','membres.tontine_id')
+                        ->select('membres.*','tontines.*')
+                        ->where('membres.user_id', $req->user_id)
+                        ->get();
+
+                // $membres = Demande::where('user_id', $req->user_id)->get();
+                $msg = 'tontines du user'.$req->user_id;
+            }
 
 
 
@@ -119,5 +131,9 @@ class MembreController extends Controller
                 'message'=>$msg,
                 'data'=>$Membres
             ]);
+        }
+
+        public function getOwnerDemandes(){
+            
         }
 }

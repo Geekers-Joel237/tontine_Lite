@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Demande;
+use Illuminate\Support\Facades\DB;
 
 class DemandeController extends Controller
 {
@@ -66,7 +67,7 @@ class DemandeController extends Controller
         }
         $validated = Validator::make($req->all(),[
             'exercice_id' =>'sometimes',
-            'user_id'=>'required',
+            // 'user_id'=>'required',
             'tontine_id'=>'sometimes'
         ]);
         if($validated->fails()){
@@ -105,18 +106,23 @@ class DemandeController extends Controller
                 $msg = 'Demandes de l\'exercice '.$req->exercice_id;
             }
             if($req->user_id){
-                $Demandes = Demande::where('user_id', $req->user_id)->get();
+                $Demandes = DB::table('tontines')
+                        ->join('demandes','tontines.id','=','demandes.tontine_id')
+                        ->select('demandes.*','tontines.nomT','tontines.montantT','tontines.maxT','tontines.type')
+                        ->where('demandes.user_id', $req->user_id)
+                        ->where('demandes.etat','0')
+                        ->latest()
+                        ->get();
+
+                // $Demandes = Demande::where('user_id', $req->user_id)->get();
                 $msg = 'Demandes du user'.$req->user_id;
             }
             if($req->user_id and $req->validation){
-                echo(0);
                 if($req->validation == 'false'){
-                    echo(1);
                     $Demandes = Demande::where('user_id', $req->user_id)
                                         ->where('validation',false)
                                         ->get();
                 }else {
-                    echo(2);
 
                     $Demandes = Demande::where('user_id', $req->user_id)
                                         ->where('validation',true)
@@ -124,7 +130,7 @@ class DemandeController extends Controller
                 }
                 $msg = 'Demandes du user'.$req->user_id;
             }
-           
+
             if($req->exercice_id and $req->user_id){
                 $Demandes = Demande::where('exercice_id', $req->exercice_id)
                 ->where('user_id', $req->user_id)
@@ -136,6 +142,14 @@ class DemandeController extends Controller
                 $Demandes = Demande::where('tontine_id', $req->tontine_id)
                 ->where('user_id', $req->user_id)
                 ->get();
+
+                // $Demandes = DB::table('users')
+                // ->join('demandes','users.id','=','demandes.user_id')
+                // ->select('demandes.*','users.*')
+                // ->where('demandes.tontine_id',$req->tontine_id)
+                // ->get();
+
+
                 $msg = ' tontine  '.$req->tontine_id .
                 ' user '.$req->user_id;
             }

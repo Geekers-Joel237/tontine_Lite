@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('demandes', function (Blueprint $table) {
             $table->id();
             $table->boolean('validation')->default(false);
+            $table->boolean('etat')->default(false);
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('exercice_id')->nullable()->constrained('exercices')->onDelete('cascade');
             $table->foreignId('tontine_id')->constrained('tontines')->onDelete('cascade');

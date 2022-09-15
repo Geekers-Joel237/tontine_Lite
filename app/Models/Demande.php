@@ -10,6 +10,7 @@ class Demande extends Model
     use HasFactory;
     protected $fillable = [
         'validation',
+        'etat',
         'user_id',
         'exercice_id',
         'tontine_id'
