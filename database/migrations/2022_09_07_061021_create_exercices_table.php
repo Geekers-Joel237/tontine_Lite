@@ -20,8 +20,8 @@ return new class extends Migration
             $table->date('dateDebutE');
             $table->date('dateFinE');
             $table->time('heureTontine');
-            $table->boolean('statusE');
-            $table->boolean('etatE');
+            $table->boolean('statusE')->default(true);
+            $table->boolean('etatE')->default(false);
             $table->foreignId('tontine_id')->constrained('tontines')->onDelete('cascade');
             $table->timestamps();
         });
