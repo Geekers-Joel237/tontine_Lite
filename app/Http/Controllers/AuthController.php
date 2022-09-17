@@ -38,7 +38,7 @@ class AuthController extends Controller
             [
                 'nom' => 'required|string|max:255',
                 'prenom' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255|unique:users',
+                // 'email' => 'required|string|email|max:255|unique:users',
                 'password' => 'required|string|min:6',
                 'telephone' => 'required|string|max:255',
                 'adresse'=>'required|string',
@@ -59,7 +59,7 @@ class AuthController extends Controller
             $user = User::create([
                 'nom' => $request->nom,
                 'prenom' => $request->prenom,
-                'email' => $request->email,
+                // 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'telephone' => $request->telephone,
                 'adresse'=>$request->adresse,

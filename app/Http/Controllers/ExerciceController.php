@@ -33,7 +33,7 @@ class ExerciceController extends Controller
     public function store(Request $req){
         $validated = Validator::make($req->all(),[
             'nomE'=> 'required|unique:Exercices',
-            'periodicite' => 'required',
+            'frequence' => 'required',
             'dateDebutE' =>'required',
             'dateFinE' =>'required',
             'heureTontine' =>'required',
@@ -67,7 +67,7 @@ class ExerciceController extends Controller
         }
         $validated = Validator::make($req->all(),[
             'nomE'=> 'required|unique:Exercices',
-            'periodicite' => 'required',
+            'frequence' => 'required',
             'dateDebutE' =>'required',
             'dateFinE' =>'required',
             'heureTontine' =>'required',

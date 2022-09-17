@@ -19,7 +19,7 @@ class ExerciceFactory extends Factory
         return [
             //
             'nomE'=>$this->faker->name(),
-            'periodicite'=>$this->faker->randomElement(['7Jours' ,'1Mois','1Semaine','1Annee']),
+            'frequence'=>$this->faker->numberBetween($min = 1, $max = 100),
             'dateDebutE'=>$this->faker->date($format = 'Y-m-d'),
             'dateFinE'=>$this->faker->date($format = 'Y-m-d'),
             'heureTontine'=>$this->faker->time(),

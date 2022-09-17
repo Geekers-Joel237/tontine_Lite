@@ -10,7 +10,7 @@ class Exercice extends Model
     use HasFactory;
     protected $fillable = [
         'nomE',
-        'periodicite',
+        'frequence',
         'dateDebutE',
         'dateFinE',
         'heureTontine',

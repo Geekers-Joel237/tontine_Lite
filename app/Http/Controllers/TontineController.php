@@ -42,7 +42,7 @@ class TontineController extends Controller
 
 
     public function index(){
-        $tontines = Tontine::all();
+        $tontines = DB::table('tontines')->latest()->get();
         return response()->json([
             'message' => 'Liste des tontines',
             'data'=> $tontines
@@ -202,6 +202,13 @@ class TontineController extends Controller
                 'data'=>$tontines
             ]);
         }
+
+        // public function filter(Request $req){
+        //     if($req->nomT || $req->fermee || $req->ouverte || $req->membreMax || $req->membreMin || $req->montantMax || $req->montantMin){
+        //         $tontines = Tontine::where()
+
+        //     }
+        // }
 
 
 

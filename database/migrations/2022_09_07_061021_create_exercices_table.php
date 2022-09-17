@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('exercices', function (Blueprint $table) {
             $table->id();
             $table->string('nomE');
-            $table->string('periodicite');
+            // $table->string('periodicite');
+            $table->float('frequence');
             $table->date('dateDebutE');
             $table->date('dateFinE');
             $table->time('heureTontine');
