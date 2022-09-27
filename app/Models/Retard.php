@@ -12,7 +12,8 @@ class Retard extends Model
         'statut',
         'seance_id',
         'exercice_id',
-        'membre_id'
+        'membre_id',
+        'tontine_id'
     ];
 
     public function seances() {

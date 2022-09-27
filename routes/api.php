@@ -50,6 +50,7 @@ Route::controller(AuthController::class)->group(function () {
 //Tontines
 Route::get('/tontines',[TontineController::class,'index']);
 Route::get('/tontines/{id}',[TontineController::class,'show']);
+Route::get('/tontines-info/{id}',[TontineController::class,'allTontinesInfo']);
 Route::post('/tontines/search',[TontineController::class,'search']);
 Route::post('/tontines',[TontineController::class,'store']);
 Route::put('/tontines/{id}',[TontineController::class,'update']);
@@ -62,6 +63,7 @@ Route::post('/exercices/search',[ExerciceController::class,'search']);
 Route::post('/exercices',[ExerciceController::class,'store']);
 Route::put('/exercices/{id}',[ExerciceController::class,'update']);
 Route::delete('/exercices/{id}',[ExerciceController::class,'destroy']);
+Route::get('/exercices-info/{id}',[ExerciceController::class,'allExercicesInfo']);
 
 //Seances
 Route::get('/seances',[SeanceController::class,'index']);
@@ -70,6 +72,7 @@ Route::post('/seances/search',[SeanceController::class,'search']);
 Route::post('/seances',[SeanceController::class,'store']);
 Route::put('/seances/{id}',[SeanceController::class,'update']);
 Route::delete('/seances/{id}',[SeanceController::class,'destroy']);
+Route::get('/seances-info/{id}',[SeanceController::class,'allseancesInfos']);
 
 //Caisses
 Route::get('/caisses',[CaisseController::class,'index']);

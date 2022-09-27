@@ -35,6 +35,7 @@ class RetardController extends Controller
             'seance_id' =>'required',
             'exercice_id' =>'required',
             'membre_id'=>'required',
+            'tontine_id' =>'required'
 
 
         ]);

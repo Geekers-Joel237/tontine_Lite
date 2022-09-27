@@ -18,7 +18,9 @@ class Cotisation extends Model
         'membre_id',
         'retard_id',
         'echec_id',
-        'caisse_id'
+        'caisse_id',
+        'tontine_id',
+        'exercice_id'
     ];
     public function seances() {
         return $this->hasMany(Seance::class);
@@ -35,5 +37,5 @@ class Cotisation extends Model
     public function caisses() {
         return $this->hasMany(Caisse::class);
     }
-    
+
 }

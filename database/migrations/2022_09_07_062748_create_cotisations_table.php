@@ -25,6 +25,8 @@ return new class extends Migration
             $table->foreignId('retard_id')->nullable()->constrained('retards')->onDelete('cascade');
             $table->foreignId('echec_id')->nullable()->constrained('echecs')->onDelete('cascade');
             $table->foreignId('caisse_id')->nullable()->constrained('caisses')->onDelete('cascade');
+            $table->foreignId('tontine_id')->nullable()->constrained('tontines')->onDelete('cascade');
+            $table->foreignId('exercice_id')->nullable()->constrained('exercices')->onDelete('cascade');
             $table->timestamps();
         });
     }

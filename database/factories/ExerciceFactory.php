@@ -18,11 +18,13 @@ class ExerciceFactory extends Factory
     {
         return [
             //
-            'nomE'=>$this->faker->name(),
+            // 'nomE'=>$this->faker->name(),
             'frequence'=>$this->faker->numberBetween($min = 1, $max = 100),
             'dateDebutE'=>$this->faker->date($format = 'Y-m-d'),
-            'dateFinE'=>$this->faker->date($format = 'Y-m-d'),
+            'duree'=>$this->faker->numberBetween($min = 1, $max = 100),
+            'periodicite'=>$this->faker->randomElement(['Jour' ,'Mois','Semaine','Annee']),
             'heureTontine'=>$this->faker->time(),
+            'lieuTontine'=>$this->faker->randomElement(['Biteng' ,'Yassa','Kabul','Emia']),
             'statusE'=>$this->faker->boolean(),
             'etatE'=>$this->faker->boolean(),
             'tontine_id'=>$this->faker->numberBetween($min = 1, $max = 100)

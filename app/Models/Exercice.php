@@ -9,11 +9,13 @@ class Exercice extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'nomE',
+        // 'nomE',
         'frequence',
         'dateDebutE',
-        'dateFinE',
+        'duree',
+        'periodicite',
         'heureTontine',
+        'lieuTontine',
         'statusE',
         'etatE',
         'tontine_id'

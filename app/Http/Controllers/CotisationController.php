@@ -42,6 +42,8 @@ class CotisationController extends Controller
             'retard_id'=>'sometimes',
             'echec_id'=>'sometimes',
             'caisse_id'=>'sometimes',
+            'tontine_id'=>'sometimes',
+            'exercice_id'=>'sometimes',
 
         ]);
         if($validated->fails()){
@@ -79,6 +81,8 @@ class CotisationController extends Controller
             'retard_id'=>'sometimes',
             'echec_id'=>'sometimes',
             'caisse_id'=>'sometimes',
+            'tontine_id'=>'sometimes',
+            'exercice_id'=>'sometimes',
         ]);
         if($validated->fails()){
             return response()->json($validated->errors(), 400);

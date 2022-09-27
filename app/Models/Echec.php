@@ -12,6 +12,7 @@ class Echec extends Model
         'statut',
         'seance_id',
         'exercice_id',
+        'tontine_id',
         'membre_id'
     ];
 

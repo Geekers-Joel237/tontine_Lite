@@ -43,6 +43,12 @@ class TontineController extends Controller
 
     public function index(){
         $tontines = DB::table('tontines')->latest()->get();
+        foreach($tontines as $key => $value){
+            $value->membres = DB::table('membres')
+            ->where('membres.tontine_id',$value->id)
+                // ->join('membres','id','=','membres.tontine_id')
+                ->get();
+        }
         return response()->json([
             'message' => 'Liste des tontines',
             'data'=> $tontines
@@ -65,7 +71,7 @@ class TontineController extends Controller
 
     public function store(Request $req){
         $validated = Validator::make($req->all(),[
-            'nomT'=> 'required|unique:tontines',
+            'nomT'=> 'required',
             'montantT' => 'required',
             'slogan' =>'required',
             'reglement' =>'sometimes',
@@ -122,7 +128,7 @@ class TontineController extends Controller
             ],404);
         }
         $validated = Validator::make($req->all(),[
-            'nomT'=> 'required|unique:tontines',
+            'nomT'=> 'required',
             'montantT' => 'required',
             'slogan' =>'required',
             'reglement' =>'sometimes',
@@ -203,12 +209,51 @@ class TontineController extends Controller
             ]);
         }
 
-        // public function filter(Request $req){
-        //     if($req->nomT || $req->fermee || $req->ouverte || $req->membreMax || $req->membreMin || $req->montantMax || $req->montantMin){
-        //         $tontines = Tontine::where()
+        public function allTontinesInfo($id){
+            $tontine = Tontine::find($id);
+            if (is_null($tontine)) {
+                return response()->json([
+                    'message' => 'tontine Introuvable'
+                ],404);
+            }
+            $tontine->exercices = DB::table('exercices')
+            ->where('tontine_id', $id)
+            ->get();
+            $tontine->membres = DB::table('membres')
+            ->join('users','users.id','=','membres.user_id')
+            ->where('tontine_id', $id)
+            ->select('membres.*','users.nom','users.prenom')
+            ->get();
+            $tontine -> demandes = DB::table('demandes')
+            ->join('users','users.id','=','demandes.user_id')
+            ->where('demandes.tontine_id',$id)
+            ->where('demandes.validation','0')
+            ->select('demandes.*','users.nom','users.prenom','users.id as idutilisateurs')
+            ->get();
+            $tontine -> retards = DB::table('retards')
+            ->join('membres','membres.id','=','retards.membre_id')
+            ->join('users','users.id','=','membres.user_id')
+            ->where('retards.tontine_id',$id)
+            ->select('retards.*','membres.*','users.nom','users.prenom')
+            ->get();
+            $tontine -> echecs = DB::table('echecs')
+            ->join('membres','membres.id','=','echecs.membre_id')
+            ->join('users','users.id','=','membres.user_id')
+            ->where('echecs.tontine_id',$id)
+            ->select('echecs.*','membres.*','users.nom','users.prenom')
+            ->get();
+            $tontine -> cotisations = DB::table('cotisations')
+                ->join('membres','membres.id','=','cotisations.membre_id')
+                ->join('users','users.id','=','membres.user_id')
+                ->where('cotisations.tontine_id',$id)
+                ->select('cotisations.*','membres.*','users.nom','users.prenom')
+                ->get();
 
-        //     }
-        // }
+
+            return response()->json([
+                'data'=>$tontine]
+            );
+        }
 
 
 

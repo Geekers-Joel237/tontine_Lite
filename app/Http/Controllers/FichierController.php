@@ -27,7 +27,7 @@ class FichierController extends Controller
             $fileModel->fileName = $fileName;
             $fileModel->filePath = '/storage/' . $filePath;
             $fileModel->extension = $extension;
-
+            $fileModel->type = $req->type;
             if(in_array($fileModel->extension,$reglements)){
                 $fileModel->type = 'reglement';
             }else if(in_array($fileModel->extention,$images)){
