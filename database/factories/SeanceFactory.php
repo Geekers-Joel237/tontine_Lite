@@ -17,11 +17,11 @@ class SeanceFactory extends Factory
     public function definition()
     {
         return [
-            'nomS'=>$this->faker->name(),
+            // 'nomS'=>$this->faker->name(),
             'dateS'=>$this->faker->date($format = 'Y-m-d'),
             'statutS'=>$this->faker->boolean(),
             'etatS'=>$this->faker->boolean(),
-            'frequence'=>$this->faker->numberBetween($min = 1, $max = 30),
+            // 'frequence'=>$this->faker->numberBetween($min = 1, $max = 30),
             'exercice_id'=>$this->faker->numberBetween($min = 1, $max = 100)
         ];
     }

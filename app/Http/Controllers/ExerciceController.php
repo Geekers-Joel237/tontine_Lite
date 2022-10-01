@@ -41,8 +41,8 @@ class ExerciceController extends Controller
             'periodicite'=>'required',
             'lieuTontine'=>'required',
             'heureTontine' =>'required',
-            'tontine_id'=>'required'
-
+            'tontine_id'=>'required',
+            'nbreBenef'=>'required'
         ]);
         if($validated->fails()){
             return response()->json($validated->errors(), 400);
@@ -77,7 +77,9 @@ class ExerciceController extends Controller
             'lieuTontine'=>'required',
             'periodicite'=>'required',
             'heureTontine' =>'required',
-            'tontine_id'=>'required'
+            'tontine_id'=>'required',
+            'nbreBenef'=>'required'
+
         ]);
         if($validated->fails()){
             return response()->json($validated->errors(), 400);

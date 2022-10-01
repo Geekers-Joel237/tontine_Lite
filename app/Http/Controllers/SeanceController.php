@@ -35,9 +35,9 @@ class SeanceController extends Controller
 
     public function store(Request $req){
         $validated = Validator::make($req->all(),[
-            'nomS'=> 'required|unique:Seances',
+            // 'nomS'=> 'required|unique:Seances',
             'dateS' => 'required',
-            'frequence' => 'required',
+            // 'frequence' => 'required',
             'exercice_id'=>'required'
 
         ]);
@@ -67,10 +67,10 @@ class SeanceController extends Controller
             ],404);
         }
         $validated = Validator::make($req->all(),[
-            'nomS'=> 'required|unique:Seances',
-            'dateS' => 'required',
-            'frequence' => 'required',
-            'exercice_id'=>'required'
+            // 'nomS'=> 'required|unique:Seances',
+            // 'dateS' => 'required',
+            // 'frequence' => 'required',
+            // 'exercice_id'=>'required'
         ]);
         if($validated->fails()){
             return response()->json($validated->errors(), 400);

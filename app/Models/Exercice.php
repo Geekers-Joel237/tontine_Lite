@@ -18,6 +18,7 @@ class Exercice extends Model
         'lieuTontine',
         'statusE',
         'etatE',
+        'nbreBenef',
         'tontine_id'
     ];
 

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->float('duree');
             $table->time('heureTontine');
             $table->string('lieuTontine');
+            $table->integer('nbreBenef');
             $table->boolean('statusE')->default(true);
             $table->boolean('etatE')->default(false);
             $table->foreignId('tontine_id')->constrained('tontines')->onDelete('cascade');

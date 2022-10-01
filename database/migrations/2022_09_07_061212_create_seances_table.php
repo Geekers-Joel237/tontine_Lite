@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('seances', function (Blueprint $table) {
             $table->id();
-            $table->string('nomS');
+            // $table->string('nomS');
             $table->date('dateS');
             $table->boolean('statutS')->default(true);
             $table->boolean('etatS')->default(false);
-            $table->float('frequence');
+            // $table->float('frequence');
             $table->foreignId('exercice_id')->constrained('exercices')->onDelete('cascade');
             $table->timestamps();
         });

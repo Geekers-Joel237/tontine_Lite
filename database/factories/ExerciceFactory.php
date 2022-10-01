@@ -22,6 +22,7 @@ class ExerciceFactory extends Factory
             'frequence'=>$this->faker->numberBetween($min = 1, $max = 100),
             'dateDebutE'=>$this->faker->date($format = 'Y-m-d'),
             'duree'=>$this->faker->numberBetween($min = 1, $max = 100),
+            'nbreBenef'=>$this->faker->numberBetween($min = 1, $max = 5),
             'periodicite'=>$this->faker->randomElement(['Jour' ,'Mois','Semaine','Annee']),
             'heureTontine'=>$this->faker->time(),
             'lieuTontine'=>$this->faker->randomElement(['Biteng' ,'Yassa','Kabul','Emia']),
