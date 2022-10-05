@@ -71,14 +71,14 @@ class ExerciceController extends Controller
         }
         $validated = Validator::make($req->all(),[
             // 'nomE'=> 'required|unique:Exercices',
-            'frequence' => 'required',
-            'dateDebutE' =>'required',
-            'duree' =>'required',
-            'lieuTontine'=>'required',
-            'periodicite'=>'required',
-            'heureTontine' =>'required',
-            'tontine_id'=>'required',
-            'nbreBenef'=>'required'
+            // 'frequence' => 'required',
+            // 'dateDebutE' =>'required',
+            // 'duree' =>'required',
+            // 'lieuTontine'=>'required',
+            // 'periodicite'=>'required',
+            // 'heureTontine' =>'required',
+            // 'tontine_id'=>'required',
+            // 'nbreBenef'=>'required'
 
         ]);
         if($validated->fails()){

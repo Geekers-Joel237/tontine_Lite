@@ -255,6 +255,29 @@ class TontineController extends Controller
             );
         }
 
-
+        public function filter(Request $req){
+            $tontines = [];
+            if(is_null($req->fermee)){
+                if($req->ouverte || $req->membreMax || $req->montantMax ){
+                    $tontines = Tontine::where('type','Ouverte')
+                        ->where('maxT','<',$req->membreMax)
+                        ->where('montantT','<',$req->montantMax)
+                        ->get();
+                }
+            }else if(is_null($req->ouverte)){
+                $tontines = Tontine::where('type','Fermee')
+                    ->where('maxT','<',$req->membreMax)
+                    ->where('montantT','<',$req->montantMax)
+                    ->get();
+            }
+             else {
+                $tontines = Tontine::where('maxT','<',$req->membreMax)
+                    ->where('montantT','<',$req->montantMax)
+                    ->get();
+            }
+            return response()->json([
+                'data'=>$tontines]
+            );
+        }
 
 }

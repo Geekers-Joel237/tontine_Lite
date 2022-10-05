@@ -52,6 +52,7 @@ Route::get('/tontines',[TontineController::class,'index']);
 Route::get('/tontines/{id}',[TontineController::class,'show']);
 Route::get('/tontines-info/{id}',[TontineController::class,'allTontinesInfo']);
 Route::post('/tontines/search',[TontineController::class,'search']);
+Route::post('/tontines/filter',[TontineController::class,'filter']);
 Route::post('/tontines',[TontineController::class,'store']);
 Route::put('/tontines/{id}',[TontineController::class,'update']);
 Route::delete('/tontines/{id}',[TontineController::class,'destroy']);
