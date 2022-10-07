@@ -35,16 +35,17 @@ class BeneficiaireController extends Controller
             'dateSeance'=> 'required',
             'classement' => 'required',
             'montant' => 'required',
-            'validation' => 'required',
+            // 'validation' => 'required',
             'membre_id' => 'required',
-            'seance_id'=>'required'
+            'seance_id'=>'required',
+            'exercice_id' => 'required',
 
         ]);
         if($validated->fails()){
             return response()->json($validated->errors(), 400);
         }
 
-        
+
 
         $Beneficiaire = Beneficiaire::create($req->all());
 
@@ -71,7 +72,9 @@ class BeneficiaireController extends Controller
             'montant' => 'required',
             'validation' => 'required',
             'membre_id' => 'required',
-            'seance_id'=>'required'
+            'seance_id'=>'required',
+            'exercice_id' => 'required',
+
         ]);
         if($validated->fails()){
             return response()->json($validated->errors(), 400);

@@ -121,11 +121,13 @@ class DemandeController extends Controller
                 if($req->validation == 'false'){
                     $Demandes = Demande::where('user_id', $req->user_id)
                                         ->where('validation',false)
+                                        ->latest()
                                         ->get();
                 }else {
 
                     $Demandes = Demande::where('user_id', $req->user_id)
                                         ->where('validation',true)
+                                        ->latest()
                                         ->get();
                 }
                 $msg = 'Demandes du user'.$req->user_id;

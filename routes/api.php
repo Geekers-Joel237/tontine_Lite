@@ -137,6 +137,8 @@ Route::post('/membres/search',[MembreController::class,'search']);
 Route::post('/membres',[MembreController::class,'store']);
 Route::put('/membres/{id}',[MembreController::class,'update']);
 Route::delete('/membres/{id}',[MembreController::class,'destroy']);
+Route::get('/membres-info/{id}',[MembreController::class,'allMembresInfos']);
+
 
 //Demandes
 Route::get('/demandes',[DemandeController::class,'index']);

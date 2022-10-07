@@ -67,10 +67,10 @@ class MembreController extends Controller
             ],404);
         }
         $validated = Validator::make($req->all(),[
-            'tontine_id' =>'required',
-            // 'exercice_id' =>'sometimes',
-            'user_id' =>'required',
-            'demande_id' =>'sometimes',
+            // 'tontine_id' =>'required',
+            // // 'exercice_id' =>'sometimes',
+            // 'user_id' =>'required',
+            // 'demande_id' =>'sometimes',
 
         ]);
         if($validated->fails()){
@@ -133,7 +133,39 @@ class MembreController extends Controller
             ]);
         }
 
-        public function getOwnerDemandes(){
-            
+        public function allMembresInfos($id){
+            $membre = Membre::find($id);
+            if (is_null($membre)) {
+                return response()->json([
+                    'message' => 'membre Introuvable'
+                ],404);
+            }
+
+            $membre -> retards = DB::table('retards')
+            ->join('membres','membres.id','=','retards.membre_id')
+            ->join('users','users.id','=','membres.user_id')
+            ->where('retards.membre_id',$id)
+            ->select('retards.*','membres.*','users.nom','users.prenom')
+            ->get();
+
+            $membre -> echecs = DB::table('echecs')
+            ->join('membres','membres.id','=','echecs.membre_id')
+            ->join('users','users.id','=','membres.user_id')
+            ->where('echecs.membre_id',$id)
+            ->select('echecs.*','membres.*','users.nom','users.prenom')
+            ->get();
+
+            $membre -> cotisations = DB::table('cotisations')
+            ->join('membres','membres.id','=','cotisations.membre_id')
+            ->join('users','users.id','=','membres.user_id')
+            ->where('cotisations.membre_id',$id)
+            ->select('cotisations.*','membres.*','users.nom','users.prenom')
+            ->get();
+
+            return response()->json([
+                'data'=>$membre
+            ]);
+
+
         }
 }

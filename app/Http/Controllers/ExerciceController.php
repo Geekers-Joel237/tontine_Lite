@@ -174,12 +174,20 @@ class ExerciceController extends Controller
             ->select('echecs.*','membres.*','users.nom','users.prenom')
             ->get();
             $exercice -> seances = DB::table('seances')
-            ->where('exercice_id',$id)
+            ->where('seances.exercice_id',$id)
+            ->get();
+            $exercice -> seancesWithBenef = DB::table('seances')
+            ->join('beneficiaires','beneficiaires.seance_id','=','seances.id')
+            ->where('seances.exercice_id',$id)
+            ->select('beneficiaires.*','seances.*')
             ->get();
             $exercice->membres = DB::table('membres')
             ->join('users','users.id','=','membres.user_id')
             ->where('exercice_id', $id)
             ->select('membres.*','users.nom','users.prenom')
+            ->get();
+            $exercice->beneficiaires = DB::table('beneficiaires')
+            ->where('exercice_id', $id)
             ->get();
 
             return response()->json(

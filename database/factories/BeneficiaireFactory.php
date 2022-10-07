@@ -23,7 +23,8 @@ class BeneficiaireFactory extends Factory
             'montant'=>$this->faker->numberBetween($min = 5000, $max = 100000),
             'validation'=>$this->faker->boolean(),
             'membre_id'=>$this->faker->numberBetween($min = 1, $max = 100),
-            'seance_id'=>$this->faker->numberBetween($min = 1, $max = 100)
+            'seance_id'=>$this->faker->numberBetween($min = 1, $max = 100),
+            'exercice_id'=>$this->faker->numberBetween($min = 1, $max = 100)
         ];
     }
 }

@@ -46,7 +46,9 @@ class TontineController extends Controller
         foreach($tontines as $key => $value){
             $value->membres = DB::table('membres')
             ->where('membres.tontine_id',$value->id)
-                // ->join('membres','id','=','membres.tontine_id')
+                ->get();
+                $value->exercices = DB::table('exercices')
+            ->where('exercices.tontine_id',$value->id)
                 ->get();
         }
         return response()->json([
@@ -137,7 +139,7 @@ class TontineController extends Controller
             'sanction'=>'required',
             'echec'=>'required',
             'type'=>'required',
-            'user_id'=>'required',
+            // 'user_id'=>'required',
         ]);
         if($validated->fails()){
             return response()->json($validated->errors(), 400);
@@ -217,7 +219,17 @@ class TontineController extends Controller
                 ],404);
             }
             $tontine->exercices = DB::table('exercices')
-            ->where('tontine_id', $id)
+            ->join('membres','membres.exercice_id','exercices.id')
+            ->join('users','users.id','membres.user_id')
+            ->where('exercices.tontine_id', $id)
+            ->select('membres.*','exercices.*','users.nom','users.prenom','users.id as idutilisateurs')
+            ->paginate(5);
+            // ->get();
+            $tontine->exercicesAll = DB::table('exercices')
+            ->join('membres','membres.exercice_id','exercices.id')
+            ->join('users','users.id','membres.user_id')
+            ->where('exercices.tontine_id', $id)
+            ->select('membres.*','exercices.*','users.nom','users.prenom','users.id as idutilisateurs')
             ->get();
             $tontine->membres = DB::table('membres')
             ->join('users','users.id','=','membres.user_id')

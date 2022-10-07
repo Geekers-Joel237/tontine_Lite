@@ -14,6 +14,7 @@ class Beneficiaire extends Model
         'montant',
         'validation',
         'membre_id',
-        'seance_id'
+        'seance_id',
+        'exercice_id'
     ];
 }

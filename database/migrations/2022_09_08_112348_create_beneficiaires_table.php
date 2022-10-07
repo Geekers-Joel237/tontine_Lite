@@ -21,6 +21,7 @@ return new class extends Migration
             $table->boolean('validation')->default(false);
             $table->foreignId('membre_id')->constrained('membres')->onDelete('cascade');
             $table->foreignId('seance_id')->constrained('seances')->onDelete('cascade');
+            $table->foreignId('exercice_id')->constrained('exercices')->onDelete('cascade');
             $table->timestamps();
         });
     }
