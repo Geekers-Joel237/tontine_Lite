@@ -13,6 +13,7 @@ class Beneficiaire extends Model
         'classement',
         'montant',
         'validation',
+        'isSeanceBenef',
         'membre_id',
         'seance_id',
         'exercice_id'

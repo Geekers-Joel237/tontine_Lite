@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('classement');
             $table->float('montant');
             $table->boolean('validation')->default(false);
+            $table->boolean('isSeanceBenef')->default(true);
             $table->foreignId('membre_id')->constrained('membres')->onDelete('cascade');
             $table->foreignId('seance_id')->constrained('seances')->onDelete('cascade');
             $table->foreignId('exercice_id')->constrained('exercices')->onDelete('cascade');

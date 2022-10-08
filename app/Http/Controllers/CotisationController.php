@@ -33,7 +33,7 @@ class CotisationController extends Controller
 
     public function store(Request $req){
         $validated = Validator::make($req->all(),[
-            'intitule'=> 'required|unique:Cotisations',
+            // 'intitule'=> 'required|unique:Cotisations',
             'motif' => 'required',
             'montant' =>'required',
             'modePaiement' =>'required',
@@ -72,7 +72,7 @@ class CotisationController extends Controller
             ],404);
         }
         $validated = Validator::make($req->all(),[
-            'intitule'=> 'required|unique:Cotisations',
+            // 'intitule'=> 'required|unique:Cotisations',
             'motif' => 'required',
             'montant' =>'required',
             'modePaiement' =>'required',

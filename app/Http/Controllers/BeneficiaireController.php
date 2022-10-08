@@ -103,11 +103,10 @@ class BeneficiaireController extends Controller
         public function search(Request $req){
             $Beneficiaires = [];
             $msg = '';
-            if($req->seance_id and $req->membre_id){
+            if($req->seance_id ){
                 $Beneficiaires = Beneficiaire::where('seance_id', $req->seance_id)
-                                            ->where('membre_id', $req->membre_id)
                                             ->get();
-                $msg = 'Beneficiaires de la tontine '.$req->seance_id;
+                $msg = 'Beneficiaires de la seance '.$req->seance_id;
             }
             return response()->json([
                 'message'=>$msg,

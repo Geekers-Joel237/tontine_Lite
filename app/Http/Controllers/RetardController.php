@@ -65,9 +65,9 @@ class RetardController extends Controller
             ],404);
         }
         $validated = Validator::make($req->all(),[
-            'seance_id' =>'required',
-            'exercice_id' =>'required',
-            'membre_id'=>'required',
+            // 'seance_id' =>'required',
+            // 'exercice_id' =>'required',
+            // 'membre_id'=>'required',
         ]);
         if($validated->fails()){
             return response()->json($validated->errors(), 400);

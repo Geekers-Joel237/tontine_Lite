@@ -65,10 +65,10 @@ class EchecController extends Controller
             ],404);
         }
         $validated = Validator::make($req->all(),[
-            'seance_id' =>'required',
-            'exercice_id' =>'required',
-            'membre_id'=>'required',
-            'tontine_id' =>'required',
+            // 'seance_id' =>'required',
+            // 'exercice_id' =>'required',
+            // 'membre_id'=>'required',
+            // 'tontine_id' =>'required',
 
         ]);
         if($validated->fails()){
